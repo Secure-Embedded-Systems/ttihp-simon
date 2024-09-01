@@ -76,20 +76,20 @@ async def test_project(dut):
     dut.ui_in.value = ((0 << 6) + (0 << 5) + 0)
     await ClockCycles(dut.clk, 2)
     
-    key_vectors = [ "0xd2427fba047e7fdc9fa45d04aa7a2ab7",
-                    "0x03dec884adc6ef3e1fa6bc445d5c5afe",
-                    "0x58c6c42c70324f5d60ee1efed7f0ffdf",
-                    "0xb25091ce2508d99a3d3a7f9c14223def" ]
+    key_vectors = [ "d2427fba047e7fdc9fa45d04aa7a2ab7",
+                    "03dec884adc6ef3e1fa6bc445d5c5afe",
+                    "58c6c42c70324f5d60ee1efed7f0ffdf",
+                    "b25091ce2508d99a3d3a7f9c14223def" ]
     
-    plain_vectors = [ "0x9f8e9892959afeeea080f1ea63e65b37",
-                      "0xd5be0328b8f87ffee3ecce3263f6ffc4",
-                      "0x49b261a460f273fce1209710987477d7",
-                      "0x4b28f378c35a5b9eac984d34c4de4d6a" ]
+    plain_vectors = [ "9f8e9892959afeeea080f1ea63e65b37",
+                      "d5be0328b8f87ffee3ecce3263f6ffc4",
+                      "49b261a460f273fce1209710987477d7",
+                      "4b28f378c35a5b9eac984d34c4de4d6a" ]
     
-    cipher_vectors = [ "0xa6b6277142e0661ccd32dc221c74caf0",
-                       "0x8687e7c1beb3b9753befec46ca36b925",
-                       "0xeb1f5c3a9a583ec336fa9e136eb8e899",
-                       "0x0eb440e457fd1392f85d4b3546e99f35" ]
+    cipher_vectors = [ "a6b6277142e0661ccd32dc221c74caf0",
+                       "8687e7c1beb3b9753befec46ca36b925",
+                       "eb1f5c3a9a583ec336fa9e136eb8e899",
+                       "0eb440e457fd1392f85d4b3546e99f35" ]
     
     dut._log.info("Test project behavior")
 
