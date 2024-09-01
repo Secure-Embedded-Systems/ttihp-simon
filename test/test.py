@@ -9,7 +9,8 @@ from cocotb.triggers import RisingEdge
 def hex_to_bits(hex_constant):
     binary_string = bin(int(hex_constant, 16))[2:]
     binary_string = binary_string.zfill(len(hex_constant) * 4)
-    for bit in binary_string:
+    rev_binary_string = binary_string[::-1]
+    for bit in rev_binary_string:
         yield int(bit)
 
 
@@ -62,20 +63,6 @@ async def test_project(dut):
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
 
-
-    # clear registers
-    # data_rdy = 3, debug_port=0, data_in=0 for 130 cycles
-    dut.ui_in.value = ((3 << 6) + (0 << 5) + 0)
-    await ClockCycles(dut.clk, 130)
-    
-    # data_rdy = 3, debug_port=1, data_in=0 for 130 cycles
-    dut.ui_in.value = ((3 << 6) + (1 << 5) + 0)
-    await ClockCycles(dut.clk, 130)
-
-    # data_rdy = 0, debug_port =0, data_in = 0 for 2 cycles
-    dut.ui_in.value = ((0 << 6) + (0 << 5) + 0)
-    await ClockCycles(dut.clk, 2)
-    
     key_vectors = [ "d2427fba047e7fdc9fa45d04aa7a2ab7",
                     "03dec884adc6ef3e1fa6bc445d5c5afe",
                     "58c6c42c70324f5d60ee1efed7f0ffdf",
@@ -91,9 +78,27 @@ async def test_project(dut):
                        "eb1f5c3a9a583ec336fa9e136eb8e899",
                        "0eb440e457fd1392f85d4b3546e99f35" ]
     
+
+    # clear registers
+    # data_rdy = 3, debug_port=0, data_in=0 for 130 cycles
+    dut.ui_in.value = ((3 << 6) + (0 << 5) + 0)
+    await ClockCycles(dut.clk, 130)
+    
+    # data_rdy = 3, debug_port=1, data_in=0 for 130 cycles
+    dut.ui_in.value = ((3 << 6) + (1 << 5) + 0)
+    await ClockCycles(dut.clk, 130)
+
+    # data_rdy = 3, debug_port=1, data_in=0
+    dut.ui_in.value = ((3 << 6) + (0 << 5) + 0)
+    
     dut._log.info("Test project behavior")
 
     for (key, pt, ct) in zip(key_vectors, plain_vectors, cipher_vectors):
+        await ClockCycles(dut.clk, 2)
+    
+        # data_rdy = 0, debug_port =0, data_in = 0 for 2 cycles
+        dut.ui_in.value = ((0 << 6) + (0 << 5) + 0)
+        await ClockCycles(dut.clk, 2)
         
         # load pt
         for bit in hex_to_bits(pt):
@@ -116,7 +121,10 @@ async def test_project(dut):
         # data_rdy = 3, debug_port = 0, data_in = 0
         dut.ui_in.value = ((3 << 6) + (0 << 5) + 0)
         await ClockCycles(dut.clk, 64*71)
-        
+
+        print(hex(store_result_reg.get_value()))
         assert(store_result_reg.get_value() == int(ct, 16))
-        
+
+        await ClockCycles(dut.clk, 2)
+
     
