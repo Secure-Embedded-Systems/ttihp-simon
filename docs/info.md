@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+This is a bitserial implementation of the Simon Block Cipher.
+Refer to Aydin Aysu, Ege Gulcan, Patrick Schaumont: SIMON Says, Break the Area Records for Symmetric Key Block Ciphers on FPGAs. IACR Cryptol. ePrint Arch. 2014: 237 (2014).
 
 ## How to test
 
-Explain how to use your project
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+No external hardware is needed for this project.
