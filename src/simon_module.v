@@ -18,7 +18,7 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module top_module(clk,reset,data_in,data_rdy,cipher_out,valid,debug_port);
+module simon_module(clk,reset,data_in,data_rdy,cipher_out,valid,debug_port);
    
    input clk,data_in,reset;
    input [1:0] data_rdy;
