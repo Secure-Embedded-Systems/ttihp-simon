@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = simon_datapath_shiftreg.v simon_key_expansion_shiftreg.v simon_module.v tt08_simon_cipher.v
+PROJECT_SOURCES = simon_datapath_shiftreg.v simon_key_expansion_shiftreg.v simon_module.v tt_um_simon_cipher.v
 
 
 ifneq ($(GATES),yes)
