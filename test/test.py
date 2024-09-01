@@ -4,6 +4,7 @@
 import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
+from cocotb.triggers import RisingEdge
 
 def hex_to_bits(hex_constant):
     binary_string = bin(int(hex_constant, 16))[2:]
