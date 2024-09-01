@@ -5,7 +5,6 @@ import cocotb
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 from cocotb.triggers import RisingEdge
-from cocotb.binary import BinaryValue
 
 def hex_to_bits(hex_constant):
     binary_string = bin(int(hex_constant, 16))[2:]
@@ -39,12 +38,9 @@ class ShiftRegister128:
 async def store_result(dut, store_result_reg):
     while True:
         await RisingEdge(dut.clk)
-        uo_out_value = BinaryValue(dut.uo_out.value)
-        if uo_out_value.is_resolvable and uo_out_value.integer is not None:
-            # Check if the valid bit (assuming it's bit 7) is asserted
-            if (uo_out_value.integer >> 7) & 1:
-                # Store the least significant bit of uo_out in the shift register
-                store_result_reg.shift_right(uo_out_value.integer & 1)
+        if dut.uo_out.value.is_resolvable and dut.uo_out.value.integer is not None:
+            if (dut.uo_out.value.integer >> 7) & 1:
+                store_result_reg.shift_right(dut.uo_out.value.integer & 1)
         
 @cocotb.test()
 async def test_project(dut):
