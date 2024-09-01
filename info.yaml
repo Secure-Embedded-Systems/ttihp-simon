@@ -20,7 +20,7 @@ project:
     - "simon_datapath_shiftreg.v"
     - "simon_key_expansion_shiftreg.v"
     - "simon_module.v"
-    - "tt08_simon_cipher"
+    - "tt_um_simon_cipher.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
