@@ -33,15 +33,15 @@ module tt_um_simon_cipher (
    //
    // UIO_OE   7-0  _unused
      
-   simon_module(.clk(clk),
-				.reset(rst_n),
-				.data_in(ui_in[0]),
-				.data_rdy(ui_in[7:6]),
-				.cipher_out(uo_out[0]),
-				.valid(ui_out[7]),
-				.debug_port(ui_in[5])
-				);
-
+   simon_module bitserial_cipher(.clk(clk),
+								 .reset(rst_n),
+								 .data_in(ui_in[0]),
+								 .data_rdy(ui_in[7:6]),
+								 .cipher_out(uo_out[0]),
+								 .valid(ui_out[7]),
+								 .debug_port(ui_in[5])
+								 );
+   
    assign uo_out[6:1] = 6'b0;
    assign uio_out = 7'b0;
    assign uio_oe  = 7'b0;
