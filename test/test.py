@@ -41,8 +41,8 @@ async def store_result(dut):
         await RisingEdge(dut.clk)
 
         # check if valid bit is asserted and store data output if so
-        if ((dut.uo_out >> 7) & 1):
-            store_result_reg.shift_right(dut.uo_out & 1)
+        if ((dut.uo_out.value >> 7) & 1):
+            store_result_reg.shift_right(dut.uo_out.value & 1)
         
 @cocotb.test()
 async def test_project(dut):
@@ -65,15 +65,15 @@ async def test_project(dut):
 
     # clear registers
     # data_rdy = 3, debug_port=0, data_in=0 for 130 cycles
-    dut.ui_in = ((3 << 6) + (0 << 5) + 0)
+    dut.ui_in.value = ((3 << 6) + (0 << 5) + 0)
     await ClockCycles(dut.clk, 130)
     
     # data_rdy = 3, debug_port=1, data_in=0 for 130 cycles
-    dut.ui_in = ((3 << 6) + (1 << 5) + 0)
+    dut.ui_in.value = ((3 << 6) + (1 << 5) + 0)
     await ClockCycles(dut.clk, 130)
 
     # data_rdy = 0, debug_port =0, data_in = 0 for 2 cycles
-    dut.ui_in = ((0 << 6) + (0 << 5) + 0)
+    dut.ui_in.value = ((0 << 6) + (0 << 5) + 0)
     await ClockCycles(dut.clk, 2)
     
     key_vectors = [ "0xd2427fba047e7fdc9fa45d04aa7a2ab7",
@@ -98,23 +98,23 @@ async def test_project(dut):
         # load pt
         for bit in hex_to_bits(pt):
             # data_rdy = 1, debug_port = 0, data_in = bit
-            dut.ui_in = ((1 << 6) + (0 << 5) + bit)
+            dut.ui_in.value = ((1 << 6) + (0 << 5) + bit)
             await ClockCycles(dut.clk, 1)
         
         # load key
         for bit in hex_to_bits(key):
             # data_rdy = 2, debug_port = 0, data_in = bit
-            dut.ui_in = ((1 << 6) + (0 << 5) + bit)
+            dut.ui_in.value = ((1 << 6) + (0 << 5) + bit)
             await ClockCycles(dut.clk, 1)
 
 
         # data_rdy = 0, debug_port = 0, data_in = 0
-        dut.ui_in = ((0 << 6) + (0 << 5) + 0)
+        dut.ui_in.value = ((0 << 6) + (0 << 5) + 0)
         await ClockCycles(dut.clk, 1)
 
         # start encryption
         # data_rdy = 3, debug_port = 0, data_in = 0
-        dut.ui_in = ((3 << 6) + (0 << 5) + 0)
+        dut.ui_in.value = ((3 << 6) + (0 << 5) + 0)
         await ClockCycles(dut.clk, 64*71)
         
         assert(store_result_reg.get_value() == int(ct, 16))
