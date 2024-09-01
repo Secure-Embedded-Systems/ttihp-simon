@@ -17,8 +17,7 @@ creating a compact cipher that is dominated by flip-flops and
 multiplexer cells.  However, the overal design size becomes minimal. A
 detailed description of the bitserial implementation technique for
 SIMON is available in [SIMON Says, Break the Area Records for
-Symmetric Key Block Ciphers on FPGAs]
-(https://eprint.iacr.org/2013/404).
+Symmetric Key Block Ciphers on FPGAs](https://eprint.iacr.org/2013/404) .
 
 | Cell            | Count                           |
 | --------------- | ------------------------------- |
