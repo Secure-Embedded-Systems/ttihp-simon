@@ -32,7 +32,7 @@ class ShiftRegister128:
     def __str__(self):
         return "".join(map(str, self.register))
 
-store_reset_reg = ShiftRegister128()
+store_result_reg = ShiftRegister128()
 
 @cocotb.coroutine
 async def store_result(dut):
@@ -115,6 +115,6 @@ async def test_project(dut):
         dut.ui_in = ((3 << 6) + (0 << 5) + 0)
         await ClockCycles(dut.clk, 64*71)
         
-        assert(store_result.get_value() == int(ct, 16))
+        assert(store_result_reg.get_value() == int(ct, 16))
         
     
