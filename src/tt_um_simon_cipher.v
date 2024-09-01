@@ -38,7 +38,7 @@ module tt_um_simon_cipher (
 								 .data_in(ui_in[0]),
 								 .data_rdy(ui_in[7:6]),
 								 .cipher_out(uo_out[0]),
-								 .valid(ui_out[7]),
+								 .valid(uo_out[7]),
 								 .debug_port(ui_in[5])
 								 );
    
