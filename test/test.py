@@ -34,7 +34,6 @@ class ShiftRegister128:
     def __str__(self):
         return "".join(map(str, self.register))
 
-store_result_reg = ShiftRegister128()
 
 @cocotb.coroutine
 async def store_result(dut, store_result_reg):
@@ -51,10 +50,12 @@ async def store_result(dut, store_result_reg):
 async def test_project(dut):
     dut._log.info("Start")
 
+    store_result_reg = ShiftRegister128()
+
     # Set the clock period to 10 us (100 KHz)
     clock = Clock(dut.clk, 10, units="us")
     cocotb.start_soon(clock.start())
-    cocotb.start_soon(store_result(dut))
+    cocotb.start_soon(store_result(dut, store_result_reg))
     
     # Reset
     dut._log.info("Reset")
