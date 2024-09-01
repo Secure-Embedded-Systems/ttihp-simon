@@ -104,7 +104,7 @@ async def test_project(dut):
         # load key
         for bit in hex_to_bits(key):
             # data_rdy = 2, debug_port = 0, data_in = bit
-            dut.ui_in.value = ((1 << 6) + (0 << 5) + bit)
+            dut.ui_in.value = ((2 << 6) + (0 << 5) + bit)
             await ClockCycles(dut.clk, 1)
 
 
