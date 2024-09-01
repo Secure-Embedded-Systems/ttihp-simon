@@ -91,7 +91,7 @@ async def test_project(dut):
     
     dut._log.info("Test project behavior")
 
-    for (key, pt, zt) in zip(key_vectors, plain_vectors, cipher_vectors):
+    for (key, pt, ct) in zip(key_vectors, plain_vectors, cipher_vectors):
         
         # load pt
         for bit in hex_to_bits(pt):
