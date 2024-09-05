@@ -53,6 +53,8 @@ module simon_module(clk,reset,data_in,data_rdy,cipher_out,valid,debug_port);
 										.key_out(key), 
 										.bit_counter(bit_counter), 
 										.round_counter(round_counter));
+
+   assign cipher_out = cihper_data;
    
 //   always@(*)
 //	 begin
