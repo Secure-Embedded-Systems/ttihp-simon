@@ -45,7 +45,7 @@ module simon_module(clk,reset,data_in,data_rdy,cipher_out,valid,debug_port);
 
    simon_key_expansion_shiftreg key_exp(.clk(clk), 
 										.reset(reset), 
-										.data_in(1'b0),   // was: data_in 
+										.data_in(data_in),   // was: data_in 
 										.data_rdy(data_rdy), 
 										.key_out(key), 
 										.bit_counter(bit_counter), 
