@@ -57,6 +57,14 @@ register was correctly loaded.
 | 111             | Encrypt and return key          |
 
 
+## LIMITATIONS
+
+This design forces the key bits to 0 upon loading, so that the
+effective key value of the cipher is always hardcoded to
+00000000_00000000_00000000_00000000.  This disables the use of the
+design as a cipher, yet it still demonstrates how a bit-serial
+architecture can be designed.
+
 ## How to test
 
 Study the testbench for example test vectors.
