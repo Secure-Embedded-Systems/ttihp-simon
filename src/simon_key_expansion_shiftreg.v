@@ -147,16 +147,20 @@ module simon_key_expansion_shiftreg(clk,
 		  lut_in3 = lut_ff3;
 	 end
    
+   // FIXED KEY IMPLEMENTATION TO KEY VALUE 00000000_00000000_00000000_00000000
+   // THIS DESIGN FORCES ALL KEY BITS TO 0 UPON LOADING
+//		else if(s1==1 || data_rdy==2)
+//		  shift_in1 = data_in;
+   
    //FIFO 60x1 Input MUX
    always@(*)
 	 begin
 		if(s1==0)
 		  shift_in1 = fifo_ff0;
-		else if(s1==1 || data_rdy==2)
-		  // FIXED KEY IMPLEMENTATION TO KEY VALUE 00000000_00000000_00000000_00000000
-		  // THIS DESIGN FORCES ALL KEY BITS TO 0 UPON LOADING
-//		  shift_in1 = ((data_rdy == 2) ? 1'b0 : data_in);
+		else if(s1==1)
 		  shift_in1 = data_in;
+		else if(data_rdy==2)
+		  shift_in1 = 1'b0;
 		else if(s1==2)
 		  shift_in1 = lut_out;
 		else if(s1==3)
