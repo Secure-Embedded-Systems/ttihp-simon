@@ -32,7 +32,7 @@ The design uses a 3-bit input and a 2-bit output, in addition to clock and reset
 | Port            |  Function                       |
 | --------------- | ------------------------------- |
 | ui[0]           | Bitserial Data Input            |
-| ui[7:5]         | Control Word                    |
+| ui[7:6]         | Control Word                    |
 | uo[0]           | Bitserial Data Output           |
 | uo[7]           | Data Output Valid               |
 
@@ -44,17 +44,16 @@ The data output is asserted by the valid bit, and should be ignored
 when the data valid bit is 0. The output ciphertext is produced in 128
 consecutive clock cycles.
 
-The 3-bit control word defines the operation of the cipher. The LSB is
+The 2-bit control word defines the operation of the cipher. The LSB is
 a debug bit study to key-loading process and to verify that the key
 register was correctly loaded.
 
-| Control         | Function                        |
-| --------------- | ------------------------------- |
-| 00x             | Idle                            |
-| 01x             | Load 128-bit plaintext          |
-| 10x             | Load 128-bit key                |
-| 110             | Encrypt and return ciphertext   |
-| 111             | Encrypt and return key          |
+| Control         | Function                           |
+| --------------- | ---------------------------------- |
+| 00              | Idle                               |
+| 01              | Load 128-bit plaintext             |
+| 10              | Load 128-bit key (see LIMITATIONS) |
+| 11              | Encrypt and return ciphertext      |
 
 
 ## LIMITATIONS

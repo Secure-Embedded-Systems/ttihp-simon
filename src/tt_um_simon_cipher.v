@@ -20,9 +20,7 @@ module tt_um_simon_cipher (
    //                          1 = load plaintext
    //                          2 = load key
    //                          3 = encrypt
-   //            5  debug_port 0 = return ciphertext
-   //                          1 = return key
-   //          4-1  _unused
+   //          5-1  _unused
    //            0  data_in    serial data input
    //
    // UO_OUT     7  valid      1 = serial data out available
@@ -38,8 +36,7 @@ module tt_um_simon_cipher (
 								 .data_in(ui_in[0]),
 								 .data_rdy(ui_in[7:6]),
 								 .cipher_out(uo_out[0]),
-								 .valid(uo_out[7]),
-								 .debug_port(ui_in[5])
+								 .valid(uo_out[7])
 								 );
    
    assign uo_out[6:1] = 6'b0;
@@ -47,6 +44,6 @@ module tt_um_simon_cipher (
    assign uio_oe  = 7'b0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, ui_in[4:1], 1'b0};
+  wire _unused = &{ena, ui_in[5:1], 1'b0};
 
 endmodule

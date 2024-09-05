@@ -17,11 +17,10 @@
 // Additional Comments: 
 //
 //////////////////////////////////////////////////////////////////////////////////
-module simon_module(clk,reset,data_in,data_rdy,cipher_out,valid,debug_port);
+module simon_module(clk,reset,data_in,data_rdy,cipher_out,valid);
    
    input clk,data_in,reset;
    input [1:0] data_rdy;
-   input 	   debug_port;
    output reg  cipher_out;
    output 	   valid;
    
@@ -55,14 +54,6 @@ module simon_module(clk,reset,data_in,data_rdy,cipher_out,valid,debug_port);
 										.round_counter(round_counter));
 
    assign cipher_out = cipher_data;
-   
-//   always@(*)
-//	 begin
-//		if(debug_port==1)
-//		  cipher_out = key;
-//		else 
-//		  cipher_out = cipher_data;
-//	 end
    
 
 endmodule
