@@ -43,9 +43,13 @@ module simon_module(clk,reset,data_in,data_rdy,cipher_out,valid,debug_port);
    // FIXED KEY IMPLEMENTATION TO KEY VALUE 00000000_00000000_00000000_00000000
    // THIS DESIGN FORCES ALL KEY BITS TO 0 UPON LOADING
 
+   wire 	   zero;
+
+   assign zero = 1'b0;
+   
    simon_key_expansion_shiftreg key_exp(.clk(clk), 
 										.reset(reset), 
-										.data_in(data_in),   // was: data_in 
+										.data_in(zero),   // was: data_in 
 										.data_rdy(data_rdy), 
 										.key_out(key), 
 										.bit_counter(bit_counter), 
