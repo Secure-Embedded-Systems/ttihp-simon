@@ -155,7 +155,8 @@ module simon_key_expansion_shiftreg(clk,
 		else if(s1==1 || data_rdy==2)
 		  // FIXED KEY IMPLEMENTATION TO KEY VALUE 00000000_00000000_00000000_00000000
 		  // THIS DESIGN FORCES ALL KEY BITS TO 0 UPON LOADING
-		  shift_in1 = ((data_rdy == 2) ? 1'b0 : data_in);
+//		  shift_in1 = ((data_rdy == 2) ? 1'b0 : data_in);
+		  shift_in1 = data_in;
 		else if(s1==2)
 		  shift_in1 = lut_out;
 		else if(s1==3)
